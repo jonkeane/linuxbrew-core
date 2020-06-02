@@ -73,6 +73,9 @@ class R < Formula
       ENV.append "LDFLAGS", "-L#{Formula[f].opt_lib}"
     end
 
+    # Avoid references to homebrew shims
+    args << "LD=#{Formula["binutils"].opt_bin}/ld"
+
     system "./configure", *args
     system "make"
     ENV.deparallelize do
