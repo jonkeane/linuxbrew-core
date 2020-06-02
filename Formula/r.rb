@@ -33,6 +33,9 @@ class R < Formula
   skip_clean "lib/R/bin", "lib/R/doc"
 
   def install
+    # Avoid references to shim
+    inreplace Dir["**/*conf.in"], "@libtool@", Formula["libtool"].bin/"glibtool"
+      
     # Fix dyld: lazy symbol binding failed: Symbol not found: _clock_gettime
     if MacOS.version == "10.11" && MacOS::Xcode.installed? &&
        MacOS::Xcode.version >= "8.0"
