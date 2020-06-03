@@ -74,7 +74,7 @@ class R < Formula
     end
 
     # Avoid references to homebrew shims
-    args << "LD=#{Formula["binutils"].opt_bin}/ld"
+    args << "LD=ld" unless OS.mac?
 
     system "./configure", *args
     system "make"
